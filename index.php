@@ -70,7 +70,7 @@
           <?php
               include("config.php");
 
-              $employee = mysqli_query($db,"select * from perkara_banding order by perkara_id desc");
+              $employee = mysqli_query($db,"select * from perkara_banding");
               while($row = mysqli_fetch_array($employee))
               {
                   echo "<tr>
@@ -88,11 +88,11 @@
           </tbody>
 
           <script>
-          $(document).ready(function() {
-              $('#example').DataTable( {
-                  "order": [[ 3, "desc" ]]
-              } );
-          } );
+          $(document).ready(function(){
+              $('#tabel-data').DataTable({
+                "order":[[3,"desc"]]
+              });
+          });
       </script>
 
       </table>
@@ -107,10 +107,9 @@
               <li><a href="https://blog.bootswatch.com/rss/">RSS</a></li>
               <li><a href="https://twitter.com/bootswatch">Twitter</a></li>
               <li><a href="https://github.com/thomaspark/bootswatch/">GitHub</a></li>
-              <li><a href="../help/#api">API</a></li>
-              <li><a href="../help/#donate">Donate</a></li>
+              <li><a href="#">API</a></li>
             </ul>
-            <p>Made by <a href="https://thomaspark.co">Thomas Park</a>.</p>
+            <p>Made by <a href="#">Tim IT PTA Surabaya</a>.</p>
             <p>Code released under the <a href="https://github.com/thomaspark/bootswatch/blob/master/LICENSE">MIT License</a>.</p>
             <p>Based on <a href="https://getbootstrap.com" rel="nofollow">Bootstrap</a>. Icons from <a href="https://fontawesome.com/" rel="nofollow">Font Awesome</a>. Web fonts from <a href="https://fonts.google.com/" rel="nofollow">Google</a>.</p>
 
