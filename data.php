@@ -20,10 +20,12 @@ $dok = new DOCXTemplate('template.docx');
 $dok->set('nama',$siswa['perkara_id']);
 $dok->set('alamat',$siswa['nomor_perkara_pn']);
 // $dok->set('alamat','Tuban');
+$nama = preg_replace('/\D/', '',$siswa['nomor_perkara_pn']);
 
 $dok->saveAs('coba_templating.docx');
 
+
 header("Content-Type:application/msword");
-header("Content-Disposition:attachment;filename=coba_templating.docx");
+header("Content-Disposition:attachment;filename=".$nama.".docx");
 readfile('coba_templating.docx');
 ?>
