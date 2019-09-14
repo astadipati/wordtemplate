@@ -4,6 +4,7 @@
   <head>
     <meta charset="utf-8">
     <title>E-Register</title>
+    <link rel="icon" type="image/x-icon" href="src/icon_pa.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     
@@ -59,10 +60,12 @@
       <table id="tabel-data" class="table table-striped table-hover">
           <thead>
               <tr>
-                  <th>Last Name</th>
-                  <th>First Name</th>
-                  <th>Job Title</th>
-                  <th>Email</th>
+                  <th>Nomor Urut</th>
+                  <th>Nomor Perkara</th>
+                  <th>Tanggal Penerimaan Berkas</th>
+                  <th>Pemohon Banding</th>
+                  <th>Nomor Perkara</th>
+                  <th>Tanggal Permohonan Banding</th>
                   <th>Aksi</th>
               </tr>
           </thead>
@@ -70,17 +73,36 @@
           <?php
               include("config.php");
 
-              $employee = mysqli_query($db,"select * from perkara_banding");
-              while($row = mysqli_fetch_array($employee))
+              // $datane = mysqli_query($db,"select * from perkara_banding");
+              $datane = mysqli_query($db,"
+              select a.perkara_id, 
+              a.nomor_urut_register a1,
+              a.nomor_perkara_banding a2,
+              a.penerimaan_kembali_berkas_banding a3,
+              a.pemohon_banding a4,
+              a.putusan_pn a7, a.nomor_perkara_pn b7, 
+              a.permohonan_banding a9,
+              a.tanggal_penetapan_sidang_pertama,
+              a.hakim1_banding, a.hakim2_banding, a.hakim3_banding,
+              a.panitera_pengganti_banding,a.tanggal_pendaftaran_banding,
+              a.putusan_banding,a.amar_putusan_banding,
+              a.tgl_pengiriman_berkas_putusan,
+              a.tgl_pemberitahuan_putusan
+              from perkara_banding a
+              ");
+              while($row = mysqli_fetch_array($datane))
               {
+                $replace = Array("/",".");
+                $noe = str_replace($replace, "", $row['b7']);
                   echo "<tr>
-                  <td>".$row['perkara_id']."</td>
-                  <td>".$row['nomor_perkara_pn']."</td>
-                  <td>".$row['putusan_pn']."</td>
-                  <td>".$row['permohonan_banding']."</td>
+                  <td>".$row['a1']."</td>
+                  <td>".$row['a2']."</td>
+                  <td>".$row['a3']."</td>
+                  <td>".$row['a4']."</td>
+                  <td>".$row['b7']."</td>
+                  <td>".$row['a9']."</td>
                   <td>
-
-                  <a href='data.php?id=".$row['perkara_id']."' class='btn btn-success btn-sm'>Cetak</a>
+                  <a href='data.php?id=".$noe."' class='btn btn-success btn-sm'>Cetak</a>
                   </td>
               </tr>";
               }
@@ -90,7 +112,7 @@
           <script>
           $(document).ready(function(){
               $('#tabel-data').DataTable({
-                "order":[[3,"desc"]]
+                "order":[[4,"ASC"]]
               });
           });
       </script>
